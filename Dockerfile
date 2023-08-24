@@ -9,7 +9,7 @@ RUN apt-get update \
 
 COPY rootfs /
 
-RUN /scripts/setup.sh
+RUN bash /scripts/setup.sh
 
 # RADIUS Authentication Messages
 EXPOSE 1812/udp
