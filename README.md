@@ -1,3 +1,27 @@
+# freeradius-ldap
+
+## debug
+
+```bash
+docker build -t freeradius-ldap .
+
+docker run -it --name freeradius-ldap \
+  -p 1812:1812/udp -p 1813:1813/udp \
+  -e "LDAP_HOST=ldap.example.com" \
+  -e "LDAP_USER=cn=admin,dc=example,dc=com" \
+  -e "LDAP_USER_ATTRIBUTE=uid" \
+  -e "LDAP_PASS=adminpassword" \
+  -e "LDAP_BASEDN=dc=example,dc=com" \
+  -e "LDAP_USER_BASEDN=ou=Users,dc=example,dc=com" \
+  -e "LDAP_GROUP_BASEDN=ou=Groups,dc=example,dc=com" \
+  -e "LDAP_RADIUS_ACCESS_GROUP=vpnaccess" \
+  -e "RADIUS_CLIENT_CREDENTIALS=1.2.3.4:password1234,5.6.7.8:password5678" \
+  freeradius-ldap
+
+```
+
+# forked from irasnyd/freeradius-ldap 
+
 Introduction
 ============
 
