@@ -16,7 +16,7 @@ jobs:
         name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=ghcr.io/Windo/freeradius-ldap
+          DOCKER_IMAGE=ghcr.io/windoc/freeradius-ldap
           DOCKER_PLATFORMS=linux/amd64,linux/arm/v7,linux/arm64/v8
           VERSION=edge
 
