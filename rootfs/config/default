@@ -741,14 +741,6 @@ session {
 #  additional steps we can take.
 post-auth {
 
-		# only allow access to a specific LDAP group
-		if (Ldap-Group == "eSMC") {
-			noop
-		}
-		else {
-			reject
-		}
-
 	#
 	#  If you need to have a State attribute, you can
 	#  add it here.  e.g. for later CoA-Request with
