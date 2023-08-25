@@ -19,7 +19,7 @@ ldap {
         server = '@LDAP_HOST@'
 
         #  Port to connect on, defaults to 389, will be ignored for LDAP URIs.
-#       port = @LDAP_PORT@
+        port = @LDAP_PORT@
 
         #  Administrator account for searching and possibly modifying.
         #  If using SASL + KRB5 these should be commented out.
