@@ -66,16 +66,16 @@ ldap {
         #
         #  At a minimum you probably want to set KRB5_CLIENT_KTNAME.
         #
-        sasl {
-                # SASL mechanism
-#               mech = 'PLAIN'
+#         sasl {
+#                 # SASL mechanism
+# #               mech = 'PLAIN'
 
-                # SASL authorisation identity to proxy.
-#               proxy = 'autz_id'
+#                 # SASL authorisation identity to proxy.
+# #               proxy = 'autz_id'
 
-                # SASL realm. Used for kerberos.
-#               realm = 'example.org'
-        }
+#                 # SASL realm. Used for kerberos.
+# #               realm = 'example.org'
+#         }
 
         #
         #  Generic valuepair attribute
@@ -123,21 +123,21 @@ ldap {
         #  Note: LDAP attribute names should be single quoted unless you want
         #  the name value to be derived from an xlat expansion, or an
         #  attribute ref.
-        update {
-                control:Password-With-Header    += 'userPassword'
-#               control:NT-Password             := 'ntPassword'
-#               reply:Reply-Message             := 'radiusReplyMessage'
-#               reply:Tunnel-Type               := 'radiusTunnelType'
-#               reply:Tunnel-Medium-Type        := 'radiusTunnelMediumType'
-#               reply:Tunnel-Private-Group-ID   := 'radiusTunnelPrivategroupId'
+#         update {
+#                 control:Password-With-Header    += 'userPassword'
+# #               control:NT-Password             := 'ntPassword'
+# #               reply:Reply-Message             := 'radiusReplyMessage'
+# #               reply:Tunnel-Type               := 'radiusTunnelType'
+# #               reply:Tunnel-Medium-Type        := 'radiusTunnelMediumType'
+# #               reply:Tunnel-Private-Group-ID   := 'radiusTunnelPrivategroupId'
 
-                #  Where only a list is specified as the RADIUS attribute,
-                #  the value of the LDAP attribute is parsed as a valuepair
-                #  in the same format as the 'valuepair_attribute' (above).
-                control:                        += 'radiusControlAttribute'
-                request:                        += 'radiusRequestAttribute'
-                reply:                          += 'radiusReplyAttribute'
-        }
+#                 #  Where only a list is specified as the RADIUS attribute,
+#                 #  the value of the LDAP attribute is parsed as a valuepair
+#                 #  in the same format as the 'valuepair_attribute' (above).
+#                 control:                        += 'radiusControlAttribute'
+#                 request:                        += 'radiusRequestAttribute'
+#                 reply:                          += 'radiusReplyAttribute'
+#         }
 
         #  Set to yes if you have eDirectory and want to use the universal
         #  password mechanism.
@@ -179,7 +179,7 @@ ldap {
         #  That change allows the modules to set their own
         #  User DN, and to not conflict with each other.
         #
-        user_dn = "LDAP-UserDn"
+        # user_dn = "LDAP-UserDn"
 
         #
         #  User object identification.
@@ -204,16 +204,16 @@ ldap {
                 #  Any of the config items below may be an attribute ref
                 #  or and expansion, so different SASL mechs, proxy IDs
                 #  and realms may be used for different users.
-                sasl {
-                        # SASL mechanism
-#                       mech = 'PLAIN'
+#                 sasl {
+#                         # SASL mechanism
+# #                       mech = 'PLAIN'
 
-                        # SASL authorisation identity to proxy.
-#                       proxy = &User-Name
+#                         # SASL authorisation identity to proxy.
+# #                       proxy = &User-Name
 
-                        # SASL realm. Used for kerberos.
-#                       realm = 'example.org'
-                }
+#                         # SASL realm. Used for kerberos.
+# #                       realm = 'example.org'
+#                 }
 
                 #  Search scope, may be 'base', 'one', sub' or 'children'
 #               scope = 'sub'
@@ -273,7 +273,7 @@ ldap {
                 #
                 #  If using Active Directory you are likely to need "group"
                 #  instead of "posixGroup".
-                filter = '(objectClass=posixGroup)'
+                filter = '(objectClass=@LDAP_GROUP_OBJECTCLASS@)'
 
                 # Search scope, may be 'base', 'one', sub' or 'children'
 #               scope = 'sub'
@@ -344,24 +344,24 @@ ldap {
         #  to insert into the request. These attributes are mapped using
         #  the same mapping scheme applied to user objects (the update section above).
         #
-        profile {
-                #  Filter for RADIUS profile objects
-#               filter = '(objectclass=radiusprofile)'
+#         profile {
+#                 #  Filter for RADIUS profile objects
+# #               filter = '(objectclass=radiusprofile)'
 
-                #  The default profile.  This may be a DN or an attribute
-                #  reference.
-                #  To get old v2.2.x style behaviour, or to use the
-                #  &User-Profile attribute to specify the default profile,
-                #  set this to &control:User-Profile.
-#               default = 'cn=radprofile,dc=example,dc=org'
+#                 #  The default profile.  This may be a DN or an attribute
+#                 #  reference.
+#                 #  To get old v2.2.x style behaviour, or to use the
+#                 #  &User-Profile attribute to specify the default profile,
+#                 #  set this to &control:User-Profile.
+# #               default = 'cn=radprofile,dc=example,dc=org'
 
-                #  The LDAP attribute containing profile DNs to apply
-                #  in addition to the default profile above.  These are
-                #  retrieved from the user object, at the same time as the
-                #  attributes from the update section, are are applied
-                #  if authorization is successful.
-#               attribute = 'radiusProfileDn'
-        }
+#                 #  The LDAP attribute containing profile DNs to apply
+#                 #  in addition to the default profile above.  These are
+#                 #  retrieved from the user object, at the same time as the
+#                 #  attributes from the update section, are are applied
+#                 #  if authorization is successful.
+# #               attribute = 'radiusProfileDn'
+#         }
 
         #
         #  Bulk load clients from the directory
@@ -440,38 +440,38 @@ ldap {
         #  WARNING: If using the ':=' operator with a multi-valued LDAP
         #  attribute, all instances of the attribute will be removed and
         #  replaced with a single attribute.
-        accounting {
-                reference = "%{tolower:type.%{Acct-Status-Type}}"
+        # accounting {
+        #         reference = "%{tolower:type.%{Acct-Status-Type}}"
 
-                type {
-                        start {
-                                update {
-                                        description := "Online at %S"
-                                }
-                        }
+        #         type {
+        #                 start {
+        #                         update {
+        #                                 description := "Online at %S"
+        #                         }
+        #                 }
 
-                        interim-update {
-                                update {
-                                        description := "Last seen at %S"
-                                }
-                        }
+        #                 interim-update {
+        #                         update {
+        #                                 description := "Last seen at %S"
+        #                         }
+        #                 }
 
-                        stop {
-                                update {
-                                        description := "Offline at %S"
-                                }
-                        }
-                }
-        }
+        #                 stop {
+        #                         update {
+        #                                 description := "Offline at %S"
+        #                         }
+        #                 }
+        #         }
+        # }
 
         #
         #  Post-Auth can modify LDAP objects too
         #
-        post-auth {
-                update {
-                        description := "Authenticated at %S"
-                }
-        }
+        # post-auth {
+        #         update {
+        #                 description := "Authenticated at %S"
+        #         }
+        # }
 
         #
         #  LDAP connection-specific options.
@@ -572,7 +572,7 @@ ldap {
                 #  The default is libldap's default, which varies based
                 #  on the contents of ldap.conf.
 
-#               require_cert    = 'demand'
+#               require_cert    = 'allow'
         }
 
         #  As of version 3.0, the 'pool' section has replaced the

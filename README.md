@@ -1,10 +1,37 @@
 # freeradius-ldap
 
-## debug
+## Change for this forked
+
+### New add Environment Variables
+
+- `LDAP_USER_ATTRIBUTE` LDAP server User attribute (default: "uid", for AD is "sAMAccountName" )
+
+- `LDAP_GROUP_ATTRIBUTE` - LDAP server Group attribute (default: "cn")
+- `LDAP_GROUP_OBJECTCLASS` - LDAP server Group objectclass for filter (default: "posixGroup", for AD is "group")
+- `DEFAULT_SECRET` - The Freeradius default client secret (default: "password1234")
+
+## get the image from github
 
 ```bash
-docker build -t freeradius-ldap .
+docker pull ghcr.io/windoc/freeradius-ldap:latest
 
+# map the short image name if need
+docker image tag ghcr.io/windoc/freeradius-ldap:latest freeradius-ldap
+```
+
+## build the image your self
+
+```bash
+git clone https://github.com/WindoC/freeradius-ldap
+
+cd freeradius-ldap
+
+docker build -t freeradius-ldap .
+```
+
+## start container example
+
+```bash
 docker run -it --name freeradius-ldap \
   -p 1812:1812/udp -p 1813:1813/udp \
   -e "LDAP_HOST=ldap.example.com" \
@@ -17,7 +44,6 @@ docker run -it --name freeradius-ldap \
   -e "LDAP_RADIUS_ACCESS_GROUP=vpnaccess" \
   -e "RADIUS_CLIENT_CREDENTIALS=1.2.3.4:password1234,5.6.7.8:password5678" \
   freeradius-ldap
-
 ```
 
 # forked from irasnyd/freeradius-ldap 
