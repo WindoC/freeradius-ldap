@@ -123,21 +123,21 @@ ldap {
         #  Note: LDAP attribute names should be single quoted unless you want
         #  the name value to be derived from an xlat expansion, or an
         #  attribute ref.
-#         update {
-#                 control:Password-With-Header    += 'userPassword'
-# #               control:NT-Password             := 'ntPassword'
-# #               reply:Reply-Message             := 'radiusReplyMessage'
-# #               reply:Tunnel-Type               := 'radiusTunnelType'
-# #               reply:Tunnel-Medium-Type        := 'radiusTunnelMediumType'
-# #               reply:Tunnel-Private-Group-ID   := 'radiusTunnelPrivategroupId'
+        update {
+                # control:Password-With-Header    += 'userPassword'
+#               control:NT-Password             := 'ntPassword'
+#               reply:Reply-Message             := 'radiusReplyMessage'
+#               reply:Tunnel-Type               := 'radiusTunnelType'
+#               reply:Tunnel-Medium-Type        := 'radiusTunnelMediumType'
+#               reply:Tunnel-Private-Group-ID   := 'radiusTunnelPrivategroupId'
 
-#                 #  Where only a list is specified as the RADIUS attribute,
-#                 #  the value of the LDAP attribute is parsed as a valuepair
-#                 #  in the same format as the 'valuepair_attribute' (above).
-#                 control:                        += 'radiusControlAttribute'
-#                 request:                        += 'radiusRequestAttribute'
-#                 reply:                          += 'radiusReplyAttribute'
-#         }
+                #  Where only a list is specified as the RADIUS attribute,
+                #  the value of the LDAP attribute is parsed as a valuepair
+                #  in the same format as the 'valuepair_attribute' (above).
+                control:                        += 'radiusControlAttribute'
+                request:                        += 'radiusRequestAttribute'
+                reply:                          += 'radiusReplyAttribute'
+        }
 
         #  Set to yes if you have eDirectory and want to use the universal
         #  password mechanism.
