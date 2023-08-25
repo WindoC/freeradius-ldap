@@ -34,21 +34,6 @@ cp -p $radiusdpath/mods-available/ldap $radiusdpath/mods-available/ldap.bak
 cp /config/ldap $radiusdpath/mods-available/ldap
 ln -s $radiusdpath/mods-available/ldap $radiusdpath/mods-enabled/ldap
 
-# set Auth-Type := ldap
-cat > /root/update_authorize << EOF
-
-    ldap
-
-    if (ok || updated)  {
-        update control {
-          Auth-Type := ldap
-        }
-    }
-
-EOF
-sed -i -e '/^authorize {$/r /root/update_authorize' /config/default
-rm /root/update_authorize
-
 #set owner and right
 chown root:root /scripts/*
 chmod 600 /scripts/*
